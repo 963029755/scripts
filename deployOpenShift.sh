@@ -58,7 +58,7 @@ export DOMAIN=`domainname -d`
 # Determine if Commercial Azure or Azure Government
 CLOUD=$( curl -H Metadata:true "http://169.254.169.254/metadata/instance/compute/location?api-version=2017-04-02&format=text" | cut -c 1-2 )
 export CLOUD=${CLOUD^^}
-
+echo $CLOUD >> ~/log.txt
 export MASTERLOOP=$((MASTERCOUNT - 1))
 export INFRALOOP=$((INFRACOUNT - 1))
 export NODELOOP=$((NODECOUNT - 1))
@@ -79,7 +79,7 @@ sed -i -e '/Defaults    env_keep += "LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSE
 if [[ $CLOUD == "US" ]]
 then
     DOCKERREGISTRYYAML=dockerregistrygov.yaml
-    export CLOUDNAME="AzureUSGovernmentCloud"
+    export CLOUDNAME="AzureChinaCloud"
 else
     DOCKERREGISTRYYAML=dockerregistrypublic.yaml
     export CLOUDNAME="AzureChinaCloud"
